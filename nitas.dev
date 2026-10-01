@@ -11,7 +11,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=
+Linker=-std=c99_@@_
 IsCpp=0
 Icon=
 ExeOutput=
@@ -28,7 +28,7 @@ Folders=include,include/vm,src,src/vm
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
 UnitCount=6
 
 [VersionInfo]

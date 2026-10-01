@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 #define NITAS_STATIC_ASSERT(expression, information) \
 typedef char information[((bool)expression) ? 1 : -1]
