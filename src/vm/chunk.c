@@ -1,4 +1,5 @@
 #include "chunk.h"
+#include "imm.h"
 
 void NitasChunk_init(NitasChunk *self)
 {
@@ -16,15 +17,23 @@ void NitasChunk_write_instruction(NitasChunk *self, NitasOpCode opcode,
 ...)
 {
 	va_list ap;
+	self->code[self->count] = opcode;
+	self->count ++;
+	va_start(ap, opcode);
 	if (opcode == NITAS_OP_ADD)
 	{
-		self->code[self->count] = NITAS_OP_ADD;
-		va_start(ap, 3);
-		self->count ++;
 		for (int i = 0;i < 3;i++)
 		{
 			self->code[self->count] = va_arg(ap, int);
 		}
+	}
+	else if (opcode == NITAS_OP_LOADI)
+	{
+		self->code[self->count] = va_arg(ap, int);
+		self->count ++;
+		NitasImm imm;
+		NitasImm_init(&imm, va_arg(ap, int));
+		NitasImm_to_char(&imm, &(self->code[self->count]));
 	}
 	va_end(ap);
 }

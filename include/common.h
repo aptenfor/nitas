@@ -7,9 +7,11 @@
 #include <stdarg.h>
 
 #define NITAS_STATIC_ASSERT(expression, information) \
-typedef char information[((bool)expression) ? 1 : -1]
+typedef char information[((bool)(expression)) ? 1 : -1]
 
 #define nitas_malloc malloc
 #define nitas_free free
+
+typedef long long NitasInt;
 
 #endif

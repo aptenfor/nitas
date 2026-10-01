@@ -9,6 +9,7 @@ typedef char NitasSlot;
 typedef enum NitasOpCode
 {
 	NITAS_OP_ADD,
+	NITAS_OP_LOADI,
 } NitasOpCode;
 struct NitasChunk
 {
