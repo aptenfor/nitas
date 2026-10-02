@@ -1,8 +1,9 @@
 #include "compiler.h"
 
+#define NITAS_SRC_BUF_SIZE 600000
 void NitasCompiler_init(NitasCompiler *self)
 {
-	self->src = nitas_malloc(600000);
+	self->src = nitas_malloc(NITAS_SRC_BUF_SIZE);
 }
 void NitasCompiler_destroy(NitasCompiler *self)
 {
@@ -20,15 +21,15 @@ int NitasCompiler_compile(NitasCompiler *self, char *file, NitasChunk *chunk)
 		return -1;
 	}
 	
-	while (fgets(self->src, sizeof(self->src), fp) != NULL)
+	while (fgets(self->src, NITAS_SRC_BUF_SIZE, fp) != NULL)
 	{
 		char instruction[100];
-		if (sscanf(self->src, "%s", instruction))
+		if (sscanf(self->src, "%s", instruction) == 1)
 		{
 			if (strcmp(instruction, "add") == 0)
 			{
 				int rd, rs1, rs2;
-				if (sscanf(self->src, "%s %d %d %d", &rd, &rs1, &rs2) == 3)
+				if (sscanf(self->src, "%*s %d %d %d", &rd, &rs1, &rs2) == 3)
 				{
 					NitasChunk_write_instruction(self->chunk, NITAS_OP_ADD,
 					rd, rs1, rs2);
@@ -37,7 +38,7 @@ int NitasCompiler_compile(NitasCompiler *self, char *file, NitasChunk *chunk)
 			else if (strcmp(instruction, "loadi") == 0)
 			{
 				int rd, imm;
-				if (sscanf(self->src, "%d %d", &rd, &imm) == 2)
+				if (sscanf(self->src, "%*s %d %d", &rd, &imm) == 2)
 				{
 					NitasChunk_write_instruction(self->chunk, NITAS_OP_LOADI,
 					rd, imm);
@@ -45,7 +46,7 @@ int NitasCompiler_compile(NitasCompiler *self, char *file, NitasChunk *chunk)
 			}
 			else
 			{
-				printf("error: %lld\n", self->line);
+				printf("error: 未知指令[%s] 行[%lld]\n", instruction, self->line);
 				return -2;
 			}
 			self->line ++;

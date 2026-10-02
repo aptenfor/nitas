@@ -1,5 +1,6 @@
 #include "chunk.h"
 #include "compiler.h"
+#include "vm.h"
 
 int main(int argc, char **argv)
 {
@@ -9,11 +10,14 @@ int main(int argc, char **argv)
 		NitasCompiler_init(&compiler);
 		NitasChunk chunk;
 		NitasChunk_init(&chunk);
+		NitasVM_init(&vm);
 		
 		NitasCompiler_compile(&compiler, argv[2], &chunk);
+		printf("exit(%lld)", NitasVM_interpret(&vm, &chunk));
 		
 		NitasChunk_destroy(&chunk);
 		NitasCompiler_destroy(&compiler);
+		NitasVM_destroy(&vm);
 	}
 	return 0;
 }

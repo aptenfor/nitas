@@ -14,7 +14,6 @@ typedef enum NitasOpCode
 struct NitasChunk
 {
 	NitasSlot *code;
-	size_t pc;
 	size_t count;
 };
 typedef struct NitasChunk NitasChunk; 
@@ -23,5 +22,5 @@ void NitasChunk_destroy(NitasChunk *self);
 void NitasChunk_write_instruction(NitasChunk *self, NitasOpCode opcode,
 ...);
 
-#define NITAS_INSTRUCTION_SIZE 4
+#define NITAS_INSTRUCTION_SIZE 6
 #endif
