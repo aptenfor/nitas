@@ -1,0 +1,7 @@
+loadi 1 1
+loadi 2 1
+add 3 1 2
+
+loadi 4 0
+store 3 4
+load 1 4

@@ -5,12 +5,12 @@
 typedef long long NitasReg;
 #define NITAS_REG_COUNT 32
 
-typedef long long NitasMem;
-#define NITAS_MEM_COUNT 10000
+typedef long long Nitasmem;
+#define NITAS_mem_COUNT 10000
 struct NitasVM
 {
 	NitasReg regs[NITAS_REG_COUNT];
-	NitasMem mem[NITAS_MEM_COUNT];
+	Nitasmem mem[NITAS_mem_COUNT];
 	NitasChunk *chunk;
 	size_t pc;
 };

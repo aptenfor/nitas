@@ -10,6 +10,8 @@ typedef enum NitasOpCode
 {
 	NITAS_OP_ADD,
 	NITAS_OP_LOADI,
+	NITAS_OP_LOAD,
+	NITAS_OP_STORE,
 } NitasOpCode;
 struct NitasChunk
 {

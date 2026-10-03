@@ -32,6 +32,16 @@ void NitasChunk_write_instruction(NitasChunk *self, NitasOpCode opcode,
 		NitasImm_init(&imm, va_arg(ap, int));
 		NitasImm_to_char(&imm, &(self->code[self->count+2]));
 	}
+	else if (opcode == NITAS_OP_LOAD)
+	{
+		self->code[self->count+1] = va_arg(ap, int);
+		self->code[self->count+2] = va_arg(ap, int);
+	}
+	else if (opcode == NITAS_OP_STORE)
+	{
+		self->code[self->count+1] = va_arg(ap, int);
+		self->code[self->count+2] = va_arg(ap, int);
+	}
 	va_end(ap);
 	self->count += NITAS_INSTRUCTION_SIZE;
 }

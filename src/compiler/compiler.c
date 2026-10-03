@@ -44,6 +44,22 @@ int NitasCompiler_compile(NitasCompiler *self, char *file, NitasChunk *chunk)
 					rd, imm);
 				}
 			}
+			else if (strcmp(instruction, "load") == 0)
+			{
+				int rd, rs;
+				if (sscanf(self->src, "%*s %d %d", &rd, &rs) == 2)
+				{
+					NitasChunk_write_instruction(self->chunk, NITAS_OP_LOAD, rd, rs);
+				}
+			}
+			else if (strcmp(instruction, "store") == 0)
+			{
+				int rs1, rs2;
+				if (sscanf(self->src, "%*s %d %d", &rs1, &rs2) == 2)
+				{
+					NitasChunk_write_instruction(self->chunk, NITAS_OP_STORE, rs1, rs2);
+				}
+			}
 			else
 			{
 				printf("error: 未知指令[%s] 行[%lld]\n", instruction, self->line);
