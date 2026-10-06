@@ -35,6 +35,15 @@ int NitasCompiler_compile(NitasCompiler *self, char *file, NitasChunk *chunk)
 					rd, rs1, rs2);
 				}
 			}
+			else if (strcmp(instruction, "sub") == 0)
+			{
+				int rd, rs1, rs2;
+				if (sscanf(self->src, "%*s %d %d %d", &rd, &rs1, &rs2) == 3)
+				{
+					NitasChunk_write_instruction(self->chunk, NITAS_OP_SUB,
+					rd, rs1, rs2);
+				}
+			}
 			else if (strcmp(instruction, "loadi") == 0)
 			{
 				int rd, imm;
@@ -59,6 +68,10 @@ int NitasCompiler_compile(NitasCompiler *self, char *file, NitasChunk *chunk)
 				{
 					NitasChunk_write_instruction(self->chunk, NITAS_OP_STORE, rs1, rs2);
 				}
+			}
+			else if (strcmp(instruction, "ecall") == 0)
+			{
+				NitasChunk_write_instruction(self->chunk, NITAS_OP_ECALL, NULL);
 			}
 			else
 			{

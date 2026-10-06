@@ -1,0 +1,6 @@
+loadi 2 3
+loadi 3 1
+sub 1 2 3
+add 10 10 1
+loadi 17 93
+ecall

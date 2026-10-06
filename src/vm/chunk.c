@@ -25,6 +25,13 @@ void NitasChunk_write_instruction(NitasChunk *self, NitasOpCode opcode,
 			self->code[self->count+i+1] = va_arg(ap, int);
 		}
 	}
+	else if (opcode == NITAS_OP_SUB)
+	{
+		for (int i = 0;i < 3;i++)
+		{
+			self->code[self->count+i+1] = va_arg(ap, int);
+		}
+	}
 	else if (opcode == NITAS_OP_LOADI)
 	{
 		self->code[self->count+1] = va_arg(ap, int);
@@ -42,6 +49,7 @@ void NitasChunk_write_instruction(NitasChunk *self, NitasOpCode opcode,
 		self->code[self->count+1] = va_arg(ap, int);
 		self->code[self->count+2] = va_arg(ap, int);
 	}
+	else if (opcode == NITAS_OP_ECALL) {}
 	va_end(ap);
 	self->count += NITAS_INSTRUCTION_SIZE;
 }

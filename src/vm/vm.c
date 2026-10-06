@@ -20,6 +20,11 @@ NitasInt NitasVM_interpret(NitasVM *self, NitasChunk *chunk)
 			self->regs[chunk->code[self->pc+1]] = 
 			self->regs[chunk->code[self->pc+2]] + self->regs[chunk->code[self->pc+3]]; 
 		}
+		else if (chunk->code[self->pc] == NITAS_OP_SUB)
+		{
+			self->regs[chunk->code[self->pc+1]] = 
+			self->regs[chunk->code[self->pc+2]] - self->regs[chunk->code[self->pc+3]]; 
+		}
 		else if (chunk->code[self->pc] == NITAS_OP_LOADI)
 		{
 			NitasImm imm;
@@ -35,6 +40,13 @@ NitasInt NitasVM_interpret(NitasVM *self, NitasChunk *chunk)
 		{
 			self->mem[self->regs[chunk->code[self->pc+2]]] =
 			self->regs[chunk->code[self->pc+1]];
+		}
+		else if (chunk->code[self->pc] == NITAS_OP_ECALL)
+		{
+			if (self->regs[17] == NITAS_ECALL_EXIT)
+			{
+				return self->regs[10];
+			}
 		}
 		self->pc += NITAS_INSTRUCTION_SIZE;
 	}

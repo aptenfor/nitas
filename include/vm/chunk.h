@@ -9,10 +9,16 @@ typedef char NitasSlot;
 typedef enum NitasOpCode
 {
 	NITAS_OP_ADD,
+	NITAS_OP_SUB,
 	NITAS_OP_LOADI,
 	NITAS_OP_LOAD,
 	NITAS_OP_STORE,
+	NITAS_OP_ECALL,
 } NitasOpCode;
+typedef enum NitasEcallNumber
+{
+	NITAS_ECALL_EXIT = 93,
+} NitasEcallNumber;
 struct NitasChunk
 {
 	NitasSlot *code;
